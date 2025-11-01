@@ -1,0 +1,214 @@
+:root {
+    --clr-primary-dark-blue: hsl(217, 19%, 35%);
+    --clr-primary-desaturated-blue: hsl(214, 17%, 51%);
+    --clr-neutral-grayish-blue: hsl(212, 23%, 69%);
+    --clr-neutral-light-grayish-blue: hsl(210, 46%, 95%);
+    --ff-main: 'Manrope', sans-serif;
+    --fw-medium: 500;
+    --fw-bold: 700;
+}
+
+/* --- CSS Reset --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--ff-main);
+    font-size: 13px;
+    background-color: var(--clr-neutral-light-grayish-blue);
+    color: var(--clr-primary-desaturated-blue);
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    padding: 1.5rem;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* --- Card Component --- */
+.card {
+    display: grid;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    max-width: 375px;
+}
+
+.card__image {
+    background: url('./images/drawers.jpg') no-repeat center center/cover;
+    height: 14rem;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.card__content {
+    padding: 2.5rem 2.5rem 1.5rem;
+}
+
+.card__title {
+    font-size: 1rem;
+    color: var(--clr-primary-dark-blue);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.card__description {
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* Mobile share active state */
+.card__footer.share-active {
+    background-color: var(--clr-primary-dark-blue);
+    border-radius: 0 0 0.75rem 0.75rem;
+}
+
+.card__author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card__author-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+}
+
+/* Hide author info when share is active on mobile */
+.card__footer.share-active .card__author {
+    display: none;
+}
+
+.card__author-name {
+    font-weight: var(--fw-bold);
+    color: var(--clr-primary-dark-blue);
+}
+
+.card__date {
+    color: var(--clr-neutral-grayish-blue);
+}
+
+/* --- Share Component --- */
+.card__share-wrapper {
+    position: relative;
+}
+
+.share-button {
+    background-color: var(--clr-neutral-light-grayish-blue);
+    border: none;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    z-index: 10;
+    position: relative;
+}
+
+.share-button.active {
+    background-color: var(--clr-primary-desaturated-blue);
+}
+
+.share-button.active img {
+    filter: brightness(0) invert(1);
+}
+
+/* On mobile, when the share footer is active, the button has a different active color */
+.card__footer.share-active .share-button.active {
+    background-color: var(--clr-primary-desaturated-blue);
+}
+
+.share-tooltip {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--clr-primary-dark-blue);
+    color: var(--clr-neutral-grayish-blue);
+    padding: 1rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-transform: uppercase;
+    
+    /* Hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+
+    /* Mobile layout: takes full footer width */
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 0.75rem 0.75rem;
+    justify-content: flex-start;
+}
+
+.share-tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.share-tooltip a i {
+    font-size: 1.25rem;
+    color: var(--clr-neutral-light-grayish-blue);
+}
+
+/* --- Desktop Layout --- */
+@media (min-width: 768px) {
+    .card {
+        grid-template-columns: 285px 1fr;
+        max-width: 730px;
+    }
+
+    .card__image {
+        height: auto;
+        border-radius: 0.75rem 0 0 0.75rem;
+    }
+
+    .card__content {
+        padding: 2rem 2.5rem;
+    }
+
+    .card__title {
+        font-size: 1.25rem;
+    }
+
+    .share-tooltip {
+        letter-spacing: 0.25em;
+        width: auto;
+        height: auto;
+        bottom: calc(100% + 1rem);
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 0.5rem;
+        padding: 0.8rem 2rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .share-tooltip::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 0.75rem;
+        border-style: solid;
+        border-color: var(--clr-primary-dark-blue) transparent transparent transparent;
+    }
+}
