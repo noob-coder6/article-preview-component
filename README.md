@@ -23,7 +23,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Solution URL](https://github.com/noob-coder6/article-preview-component.git)
-- Live Site URL: [LIVE DEMO](https://your-live-site-url.com)
+- Live Site URL: [LIVE DEMO](https://noob-coder6.github.io/article-preview-component/)
 
 
 ### Built with
