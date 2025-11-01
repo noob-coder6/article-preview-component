@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (shareButton) {
         shareButton.addEventListener('click', (event) => {
-            //event.stopPropagation(); // Prevents click from bubbling up to the document
+            event.stopPropagation(); // Prevents click from bubbling up to the document
             
             // Toggle active states for both button and tooltip
             const isActive = shareTooltip.classList.toggle('visible');
